@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Leaflet- możliwości</title>
+      <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+      <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	  
+		<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 600px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+		ul.a{list-style-type: circle}
+		#bottom {
+		border: 1px solid #005580;
+		border-radius: 4px;
+		color: black;
+		text-align: center;
+		padding: 50px;
+		font-size: 90%;
+		line-height: 14px;}
+	</style>
+   </head>
+
+   <body>
+	<h1>Wykorzystanie różnych możliwości Leaflet</h1>
+	
+      <div id = "map" ></div>
+      <script>
+         // Creating map options
+         var mapOptions = {
+            center: [52.3253342, 22.0365603],
+            zoom: 10
+         }
+         
+         // Creating a map object
+         var map = new L.map('map', mapOptions);
+         
+         // Creating a Layer object
+         var layer = new L.TileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png');
+		var cieniowanie = L.tileLayer.wms("https://mapy.geoportal.gov.pl/wss/service/PZGIK/NMT/GRID1/WMS/ShadedRelief?", {
+		layers: 'Raster',
+		format: 'image/png',
+		transparent: true,
+		});
+		var szczyty = L.tileLayer.wms("https://mapy.geoportal.gov.pl/wss/service/img/guest/WMS/Szczyty?", {
+		layers: 'szczyty',
+		format: 'image/png',
+		transparent: true,
+		});
+		var marker = new L.Marker([52.3253342, 22.0365603]);
+		
+         map.addLayer(layer);
+		 map.addLayer(szczyty);
+		 marker.addTo(map);
+		 
+		var markersGroup = L.layerGroup();
+		map.addLayer(markersGroup);
+
+		//możliwość zaznaczenia 10 pinezek na mapie
+		map.on('click', function(e) {
+		var markersCount = markersGroup.getLayers().length;
+		var MARKERS_MAX = 10;
+		if (markersCount < MARKERS_MAX) {
+			var marker = L.marker(e.latlng).addTo(markersGroup);
+			return;
+		}
+
+		// po zaznaczeniu 10- znikają
+		markersGroup.clearLayers();
+		});
+		
+         var latlng = [
+            [53.7550776,20.4550916],
+            [53.5854426,20.2492644],
+            [52.8803472,20.610729],
+            [52.603932,21.4388307],
+			[52.5382702,21.6825511],
+			[52.4004618,22.0151192],
+			[52.3253342, 22.0365603]
+         ];
+         // tworzenie polilinni
+         var polyline = L.polyline(latlng, {color: 'yellow'});
+         polyline.addTo(map);
+		 
+		 const baseLayers = {
+		'Wykaz szczytów':szczyty,
+		'Cieniowanie': cieniowanie,
+		
+		}; 
+		const layerControl = L.control.layers(null,baseLayers).addTo(map);
+		var imageUrl = 'https://images.unsplash.com/photo-1517347723389-1983cac7e239?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+		imageBounds = [[49.2917503,19.9390009], [49.3002183,19.9492954]];
+		L.imageOverlay(imageUrl, imageBounds).addTo(map);
+      </script>
+	  <p>Co zostało wykorzystane:</p>
+		<ul class='a'>
+			<li>dodawanie pinezek w 10 miejscach (po wstawieniu maksymalnej ilości- znikają),</li>
+			<li>dodawanie polilinni,</li>
+			<li>zamieszczenie zdjęcia (niespodzianka w Zakopanem).</li>
+		</ul>
+		<div id='bottom'>
+		Strona internetowa wykonana w ramach zajęć- programowanie sieciowe, przez Marię Błońską. 
+		
+   </body>
+   
+</html>
