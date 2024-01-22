@@ -5,7 +5,7 @@
       <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
       <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 	  
-		<style>
+	<style>
 		html, body {
 			height: 100%;
 			margin: 0;
@@ -18,13 +18,14 @@
 		}
 		ul.a{list-style-type: circle}
 		#bottom {
-		border: 1px solid #005580;
-		border-radius: 4px;
-		color: black;
-		text-align: center;
-		padding: 50px;
-		font-size: 90%;
-		line-height: 14px;}
+			border: 1px solid #005580;
+			border-radius: 4px;
+			color: black;
+			text-align: center;
+			padding: 50px;
+			font-size: 90%;
+			line-height: 14px;
+		}
 	</style>
    </head>
 
@@ -77,27 +78,26 @@
 		});
 		
          var latlng = [
-            [53.7550776,20.4550916],
-            [53.5854426,20.2492644],
-            [52.8803472,20.610729],
-            [52.603932,21.4388307],
-			[52.5382702,21.6825511],
-			[52.4004618,22.0151192],
-			[52.3253342, 22.0365603]
+	        [53.7550776,20.4550916],
+	        [53.5854426,20.2492644],
+	        [52.8803472,20.610729],
+	        [52.603932,21.4388307],
+		[52.5382702,21.6825511],
+		[52.4004618,22.0151192],
+		[52.3253342, 22.0365603]
          ];
          // tworzenie polilinni
          var polyline = L.polyline(latlng, {color: 'yellow'});
-         polyline.addTo(map);
+        		 polyline.addTo(map);
 		 
-		 const baseLayers = {
+	 const baseLayers = {
 		'Wykaz szczytów':szczyty,
 		'Cieniowanie': cieniowanie,
-		
-		}; 
-		const layerControl = L.control.layers(null,baseLayers).addTo(map);
-		var imageUrl = 'https://images.unsplash.com/photo-1517347723389-1983cac7e239?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+	}; 
+	const layerControl = L.control.layers(null,baseLayers).addTo(map);
+	var imageUrl = 'https://images.unsplash.com/photo-1517347723389-1983cac7e239?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 		imageBounds = [[49.2917503,19.9390009], [49.3002183,19.9492954]];
-		L.imageOverlay(imageUrl, imageBounds).addTo(map);
+	L.imageOverlay(imageUrl, imageBounds).addTo(map);
       </script>
 	  <p>Co zostało wykorzystane:</p>
 		<ul class='a'>
@@ -105,8 +105,8 @@
 			<li>dodawanie polilinni,</li>
 			<li>zamieszczenie zdjęcia (niespodzianka w Zakopanem).</li>
 		</ul>
-		<div id='bottom'>
-		Strona internetowa wykonana w ramach zajęć- programowanie sieciowe, przez Marię Błońską. 
+	<div id='bottom'>
+	Strona internetowa wykonana w ramach zajęć- programowanie sieciowe, przez Marię Błońską. 
 		
    </body>
    
